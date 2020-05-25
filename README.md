@@ -1,6 +1,7 @@
 # pysolaredge
-Python API wrapper for SolarEdge monitoring
-
+Python API wrapper for SolarEdge monitoring.<br/>
+This library allows you to easily communicate with the SolarEdge API to get data about solar installations.<br/>
+For more information about the documentation see https://www.solaredge.com/sites/default/files/se_monitoring_api.pdf
 
 # Installation
 ```
