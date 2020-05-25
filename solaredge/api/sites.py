@@ -111,7 +111,7 @@ class Sites(object):
             Returns:
                 response (JSON): a JSON dictionary containing the details for multiple sites
         """
-        api_endpoint = '/sites/%s/details' % ','.join(map(str, site_ids))
+        api_endpoint = '/sites/%s/overview' % ','.join(map(str, site_ids))
         full_api_url = BASE_URL + api_endpoint
         response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
         return response.json()
