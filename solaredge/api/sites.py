@@ -1,6 +1,5 @@
 import requests
 from ..api.error import IdentifierError
-
 BASE_URL = 'https://monitoringapi.solaredge.com'
 
 
@@ -8,8 +7,8 @@ class Sites(object):
     """
         Object for getting API details about sites
     """
-    def __init__(self, api_key):
-        self.api_key = api_key
+    def __init__(self, client):
+        self.client = client
 
     def get_total_sites(self, searchText="", status=""):
         """
@@ -32,7 +31,7 @@ class Sites(object):
         full_api_url = BASE_URL + api_endpoint
         parameters = {
             'status': status,
-            'api_key': self.api_key
+            'api_key': self.client.get_api_key()
         }
 
         if searchText:
@@ -77,7 +76,7 @@ class Sites(object):
             'startIndex': startIndex,
             'sortOrder': sortOrder,
             'status': status,
-            'api_key': self.api_key
+            'api_key': self.client.get_api_key()
         }
 
         if searchText:
@@ -100,7 +99,7 @@ class Sites(object):
 
         api_endpoint = '/site/%s/details' % site_id
         full_api_url = BASE_URL + api_endpoint
-        response = requests.get(full_api_url, params={'api_key': self.api_key})
+        response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
         return response.json()
 
     def get_multiple_site_details(self, site_ids):
@@ -114,7 +113,7 @@ class Sites(object):
         """
         api_endpoint = '/sites/%s/details' % ','.join(map(str, site_ids))
         full_api_url = BASE_URL + api_endpoint
-        response = requests.get(full_api_url, params={'api_key': self.api_key})
+        response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
         return response.json()
 
     def get_site_start_and_end_dates(self, site_id):
@@ -129,7 +128,7 @@ class Sites(object):
             raise IdentifierError("This API call needs to have a site_id.")
         api_endpoint = '/site/%s/dataPeriod' % site_id
         full_api_url = BASE_URL + api_endpoint
-        response = requests.get(full_api_url, params={'api_key': self.api_key})
+        response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
         return response.json()
 
     def get_energy_details(self, site_id, startDate, endDate, timeUnit):
@@ -153,7 +152,7 @@ class Sites(object):
             'startDate': startDate,
             'endDate': endDate,
             'timeUnit': timeUnit,
-            'api_key': self.api_key
+            'api_key': self.client.get_api_key()
         }
 
         response = requests.get(full_api_url, params=parameters)
@@ -180,7 +179,7 @@ class Sites(object):
             'startDate': startDate,
             'endDate': endDate,
             'timeUnit': timeUnit,
-            'api_key': self.api_key
+            'api_key': self.client.get_api_key()
         }
 
         response = requests.get(full_api_url, params=parameters)

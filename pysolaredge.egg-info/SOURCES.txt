@@ -1,0 +1,11 @@
+README.md
+setup.py
+pysolaredge.egg-info/PKG-INFO
+pysolaredge.egg-info/SOURCES.txt
+pysolaredge.egg-info/dependency_links.txt
+pysolaredge.egg-info/requires.txt
+pysolaredge.egg-info/top_level.txt
+solaredge/__init__.py
+solaredge/api/__init__.py
+solaredge/api/error.py
+solaredge/api/sites.py

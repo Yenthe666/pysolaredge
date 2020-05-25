@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: py-solaredge
+Version: 0.0.4.2
+Summary: Python API wrapper for SolarEdge monitoring services
+Home-page: https://github.com/Yenthe666/pysolaredge
+Author: Yenthe Van Ginneken
+Author-email: yenthevg@gmail.com
+Maintainer: Yenthe Van Ginneken
+Maintainer-email: yenthevg@gmail.com
+License: BSD
+Description: # pysolaredge
+        Python API wrapper for SolarEdge monitoring
+        
+Keywords: SolarEdge,SolarEdge API,SolarEdge Monitoring,SolarEdge Monitoring API
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Topic :: Scientific/Engineering
+Description-Content-Type: text/markdown

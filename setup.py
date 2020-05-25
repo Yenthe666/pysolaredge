@@ -7,11 +7,14 @@ ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 def get_long_description():
-    return open(os.path.join(ROOT_DIR, 'README.md'), encoding='utf-8').read()
+    long_description = []
+    with open(os.path.join("README.md")) as f:
+        long_description.append(f.read())
+    return "\n".join(long_description)
 
 setup(
-    name='pysolaredge',
-    version=0.0.1,
+    name='py-solaredge',
+    version='0.0.4.2',
     license='BSD',
     long_description=get_long_description(),
     long_description_content_type='text/markdown',
