@@ -3,3 +3,8 @@ __pycache__/
 dist/*
 build/*
 .idea/*
+develop-eggs/*
+eggs/*
+.eggs/*
+*.egg-info/
+*.egg
