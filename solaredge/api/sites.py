@@ -37,7 +37,7 @@ class Sites(object):
         if searchText:
             parameters['searchText'] = searchText
 
-        total_sites = int(requests.get(full_api_url, params=parameters).get('sites').get('count'))
+        total_sites = int(requests.get(full_api_url, params=parameters).json().get('sites').get('count'))
         return total_sites
 
     def get_sites(self, size=100, startIndex=0, searchText="", sortProperty="", sortOrder="", status=""):
