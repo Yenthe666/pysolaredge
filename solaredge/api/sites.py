@@ -131,16 +131,16 @@ class Sites(object):
         response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
         return response.json()
 
-    def get_energy_details(self, site_id, startDate, endDate, timeUnit):
+    def get_energy(self, site_id, startDate, endDate, timeUnit):
         """
-            Returns the energy detail for a specific site and date range.
-            Call get_multiple_energy_details if you'd like to get energy details for multiple locations at once!
+            Returns the energy for a specific site and date range.
+            Call get_multiple_energy if you'd like to get energy for multiple locations at once!
             Parameters:
                 site_id (int): the ID of a site location (can be fetched from the get_sites function)
                 startDate (string): the start date from when you want metrics (in the format YYYY-MM-DD)
                 endDate (string): the end date untill when you want metrics (in the format YYYY-MM-DD)
             Returns:
-                response (json): a JSON dictionary containing the energy details for a site
+                response (json): a JSON dictionary containing the energy for a site
         """
         if not site_id or not startDate or not endDate:
             raise IdentifierError("This API call needs to have a site_id, startDate and endDate.")
@@ -158,7 +158,7 @@ class Sites(object):
         response = requests.get(full_api_url, params=parameters)
         return response.json()
 
-    def get_multiple_energy_details(self, site_ids, startDate, endDate, timeUnit):
+    def get_multiple_energy(self, site_ids, startDate, endDate, timeUnit):
         """
             Returns the energy detail for multiple sites within a date range.
             Parameters:
@@ -167,7 +167,7 @@ class Sites(object):
                 startDate (string): the start date from when you want metrics (in the format YYYY-MM-DD)
                 endDate (string): the end date untill when you want metrics (in the format YYYY-MM-DD)
             Returns:
-                response (json): a JSON dictionary containing the energy details for multiple sites
+                response (json): a JSON dictionary containing the energy for multiple sites
         """
         if not site_ids or not startDate or not endDate:
             raise IdentifierError("This API call needs to have site_ids, a startDate and an endDate.")
@@ -179,6 +179,58 @@ class Sites(object):
             'startDate': startDate,
             'endDate': endDate,
             'timeUnit': timeUnit,
+            'api_key': self.client.get_api_key()
+        }
+
+        response = requests.get(full_api_url, params=parameters)
+        return response.json()
+
+    def get_energy_details(self, site_id, start_time, end_time, time_unit):
+        """
+        Returns the energy details for a specific site and datetime range.
+        Parameters:
+            site_id (int): the ID of a site location (can be fetched from the get_sites function)
+            start_time (string): the start datetime from when you want metrics (in the format yyyy-MM-DD hh:mm:ss)
+            end_time (string): the end datetime until when you want metrics (in the format yyyy-MM-DD hh:mm:ss)
+            time_unit (string): the unit to break data into
+        Returns:
+            response (json): a JSON dictionary containing the energy details for a site
+        """
+        if not site_id or not start_time or not end_time:
+            raise IdentifierError("This API call needs to have a site_id, start_time and end_time.")
+
+        api_endpoint = '/site/%s/energyDetails' % site_id
+        full_api_url = BASE_URL + api_endpoint
+
+        parameters = {
+            'startTime': start_time,
+            'endTime': end_time,
+            'timeUnit': time_unit,
+            'api_key': self.client.get_api_key()
+        }
+
+        response = requests.get(full_api_url, params=parameters)
+        return response.json()
+
+    def get_power(self, site_id, start_time, end_time):
+        """
+        Return the site power measurements in 15 minutes resolution
+        Parameters:
+            site_id (int): the ID of a site location (can be fetched from the get_sites function)
+            start_time (string): the start datetime from when you want metrics (in the format yyyy-MM-DD hh:mm:ss)
+            end_time (string): the end datetime until when you want metrics (in the format yyyy-MM-DD hh:mm:ss)
+        Returns:
+            response (json): a JSON dictionary containing the power details for a site
+        """
+        if not site_id or not start_time or not end_time:
+            raise IdentifierError("This API call needs to have a site_id, start_time and end_time.")
+
+        api_endpoint = '/site/%s/power' % site_id
+        full_api_url = BASE_URL + api_endpoint
+
+        parameters = {
+            'startTime': start_time,
+            'endTime': end_time,
             'api_key': self.client.get_api_key()
         }
 
