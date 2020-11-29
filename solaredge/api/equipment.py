@@ -25,3 +25,20 @@ class Equipment(object):
         full_api_url = BASE_URL + api_endpoint
         response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
         return response.json()
+
+    def get_inverter_technical_data(self, site_id, serial_number, startTime, endTime,):
+        if not site_id:
+            raise IdentifierError("This API call needs to have a site_id.")
+        if not serial_number:
+            raise IdentifierError("This API call needs to have a serial_number.")
+
+        api_endpoint = '/equipment/%s/%s/data' % (site_id, serial_number)
+        full_api_url = BASE_URL + api_endpoint
+        parameters = {
+            'startTime': startTime.strftime("%Y-%m-%d %H:%M:%S"),
+            'endTime': endTime.strftime("%Y-%m-%d %H:%M:%S"),
+            'api_key': self.client.get_api_key()
+        }
+        response = requests.get(full_api_url, params=parameters)
+        return response.json()
+
