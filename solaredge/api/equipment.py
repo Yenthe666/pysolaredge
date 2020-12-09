@@ -26,7 +26,17 @@ class Equipment(object):
         response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
         return response.json()
 
-    def get_inverter_technical_data(self, site_id, serial_number, startTime, endTime,):
+    def get_inverter_technical_data(self, site_id, serial_number, startTime, endTime):
+        """
+            Returns the inverters technical data for a specific site.
+            Parameters:
+                site_id (int): the ID of a site location (can be fetched from the get_sites function).
+                serial_number (str): the serial number of the inverter.
+                startTime (datetime): the start date and time of the data.
+                endTime (datetime): the end date and time of the data.
+            Returns:
+                response (JSON): a JSON dictionary containing the inverter technical data.
+        """
         if not site_id:
             raise IdentifierError("This API call needs to have a site_id.")
         if not serial_number:
