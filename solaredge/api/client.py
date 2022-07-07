@@ -1,6 +1,6 @@
-from .error import Error, RequestError, IdentifierError
 from .sites import Sites
 from .equipment import Equipment
+from .battery import Battery
 
 
 class Client(object):
@@ -8,6 +8,7 @@ class Client(object):
         self.api_key = None
         self.sites = Sites(self)
         self.equipment = Equipment(self)
+        self.battery = Battery(self)
 
     def set_api_key(self, api_key):
         self.api_key = api_key
