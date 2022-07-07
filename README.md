@@ -39,3 +39,11 @@ Getting the equipment / component list for a location:
 ```
 equipment = se_client.equipment.get_site_equipment('location_id')
 ```
+
+
+## Batteries
+Getting data about the batteries for a location (for the last day):
+```
+battery = se_client.battery.get_site_storage_data(12345, datetime.now() - timedelta(days=1), datetime.now())
+```
+
