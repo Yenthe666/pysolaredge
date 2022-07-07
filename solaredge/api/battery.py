@@ -24,7 +24,7 @@ class Battery(object):
         if not site_id:
             raise IdentifierError("This API call needs to have a site_id.")
         if not startTime:
-            raise IdentifierError("This API call needs to have endTime.")
+            raise IdentifierError("This API call needs to have startTime.")
         if not endTime:
             raise IdentifierError("This API call needs to have endTime.")
 
