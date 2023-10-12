@@ -236,3 +236,20 @@ class Sites(object):
 
         response = requests.get(full_api_url, params=parameters)
         return response.json()
+
+    def get_inventory(self, site_id):
+        """
+            Return the inventory of SolarEdge equipment in the site, including inverters/SMIs, batteries, meters, gateways and sensors.
+            Parameters:
+                site_id (int): the ID of a site location (can be fetched from the get_sites function)
+            Returns:
+                response (JSON): a JSON dictionary containing the response includes a list equipment installed on site
+        """
+        if not site_id:
+            raise IdentifierError("This API call needs to have a site_id.")
+
+        api_endpoint = '/site/%s/inventory' % site_id
+        full_api_url = BASE_URL + api_endpoint
+        response = requests.get(full_api_url, params={'api_key': self.client.get_api_key()})
+        return response.json()
+    
